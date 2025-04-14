@@ -5,6 +5,7 @@ import { Hero } from './components/Hero';
 import { Login } from './components/Login';
 import { Register } from './components/Register';
 import { Dashboard } from './components/Dashboard';
+import Quiz from './components/Quiz';
 function App() {
   return (
     <Router>
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path='/dashboard' element={<Dashboard/>} />
+        <Route path='/quiz' element={<Quiz/>} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserProfile } from './UserProfile';
-import { ChatBox } from './ChatBox';
 import { Brain, LogOut } from 'lucide-react';
+import { ChatBox } from './ChatBox';
 
 export function Dashboard() {
   return (
