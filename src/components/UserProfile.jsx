@@ -13,7 +13,7 @@ export function UserProfile() {
     <div className="profile-container">
       <div className="profile-header">
         <div className="profile-avatar">
-        <img src="https://lh3.googleusercontent.com/a/ACg8ocKeRvxgVuBzWz52URN-dcUYD9VH-11XYmQAFlh-Fza_ay_wD_N2tQ=s96-c" alt="User avatar" width={100} />
+        <img src={user.photoURL} alt="User avatar" width={100} />
 
         </div>
         <div className="profile-info">
