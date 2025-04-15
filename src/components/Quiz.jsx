@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Button } from './Button'
 
 const Quiz = () => {
   const [question, setQuestion] = useState('')
@@ -8,6 +7,7 @@ const Quiz = () => {
   const [selectedanswer, setselectedanswer] = useState('')
   const [correctanswer, setcorrectanswer] = useState('')
   const [answerStatus, setAnswerstatus] = useState('')
+  const [correctCounter,setCorrectCounter]= useState(0)
   const API_KEY = "x159m185zbG2U87cucMN7tWwdVnsRW1ya48Y7kyV"
 
   const getQuestion = async () => {
@@ -32,8 +32,10 @@ const Quiz = () => {
     setselectedanswer(key)
     console.log("key=>>>", key)
     console.log("correct answer====>", correctanswer)
+    var count=0;
     if (key === correctanswer) {
       setAnswerstatus('correct')
+      setCorrectCounter((prev)=>prev+1)
     } else {
       setAnswerstatus('wrong')
     }
@@ -41,10 +43,23 @@ const Quiz = () => {
   }
 
   return (
-    <div>
-      <Button onClick={getQuestion}>Get Question</Button>
+    <div >
+      <button onClick={getQuestion} 
+         style={{
+          backgroundColor: '#4F46E5', // Indigo-600
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '16px',
+          fontWeight: '600',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)',
+        }}
+      >Get Question</button>
 
-      {question && <p><strong>Question:</strong> {question}</p>}
+      {question && <p style={{marginTop:'1rem',marginBottom:'1rem'}}><strong>Question:</strong> {question}</p>}
 
       {options && (
         <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -54,7 +69,7 @@ const Quiz = () => {
                 <button
                   style={{
                     padding: '10px 20px',
-                    width: '100%',
+                    width: '50%',
                     backgroundColor: '#f0f0f0',
                     border: '1px solid #ccc',
                     borderRadius: '6px',
@@ -77,6 +92,22 @@ const Quiz = () => {
           ))}
         </ul>
       )}
+      <div className="correctCounter">Correct count:{correctCounter}</div>
+      <button 
+         style={{
+          backgroundColor: '#4F46E5', // Indigo-600
+          color: 'white',
+          padding: '10px 20px',
+          border: 'none',
+          borderRadius: '8px',
+          fontSize: '16px',
+          fontWeight: '600',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)',
+          marginTop:'1rem'
+        }}
+      >Submit</button>
     </div>
   )
 }

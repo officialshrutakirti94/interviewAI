@@ -27,12 +27,12 @@ export function UserProfile() {
       
       <div className="profile-stats">
         <div className="stat-item">
-          <h3>Interviews Completed</h3>
+          <h3>Quiz Completed</h3>
           <p>{user?.userCompletion}</p>
         </div>
         <div className="stat-item">
-          <h3>Last Active</h3>
-          <p>{user.lastActive}</p>
+          <h3 >Streak</h3>
+          <p>2 ️‍🔥</p>
         </div>
       </div>
     </div>

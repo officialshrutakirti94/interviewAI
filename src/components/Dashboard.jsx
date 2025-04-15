@@ -1,16 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserProfile } from './UserProfile';
 import { Brain, LogOut } from 'lucide-react';
 import { ChatBox } from './ChatBox';
+import Quiz from './Quiz';
 
 export function Dashboard() {
+  const [activeComponent,setactivecomponent]=useState('chat')
   return (
     <div className="dashboard-layout">
       <nav className="dashboard-nav">
         <div className="nav-brand">
           <Brain size={24} />
           <span>InterviewAI</span>
+          <div className="list">
+          <button
+  onClick={() => setactivecomponent('quiz')}
+  style={{
+    backgroundColor: '#4F46E5', // Indigo-600
+    color: 'white',
+    padding: '10px 20px',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '16px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)',
+  }}
+>
+ quiz
+</button>
+
         </div>
+        </div>
+        
         <button className="logout-button">
           <LogOut size={20} />
           <a href='/'>Logout</a>
@@ -22,7 +45,8 @@ export function Dashboard() {
           <UserProfile />
         </aside>
         <main className="dashboard-main">
-          <ChatBox />
+          {activeComponent==='chat' && <ChatBox/>}
+          {activeComponent==='quiz' && <Quiz/>}
         </main>
       </div>
     </div>
