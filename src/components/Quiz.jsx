@@ -8,7 +8,7 @@ const Quiz = () => {
   const [correctanswer, setcorrectanswer] = useState('')
   const [answerStatus, setAnswerstatus] = useState('')
   const [correctCounter,setCorrectCounter]= useState(0)
-  const API_KEY = "x159m185zbG2U87cucMN7tWwdVnsRW1ya48Y7kyV"
+  const API_KEY = "6THdtbSZeOyq4kgXYDNyHY22i7j3H1x0bF3Kl9Ef"
 
   const getQuestion = async () => {
     try {

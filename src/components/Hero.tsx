@@ -1,8 +1,10 @@
 import React from 'react';
 import { Badge } from './Badge';
 import { Button } from './Button';
+import { useNavigate } from 'react-router-dom';
 
 export function Hero() {
+  const navigate=useNavigate()
   return (
     <main className="hero">
       <div className="hero-content">
@@ -17,7 +19,7 @@ export function Hero() {
           InterviewAI is a better way to practice and master your interview skills. 
           Get personalized feedback and coaching from our advanced AI system.
         </p>
-        <Button>Get early access</Button>
+        <Button onClick={()=>navigate('/login')}>Get early access</Button>
       </div>
       <div className="grid-background"></div>
     </main>

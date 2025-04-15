@@ -13,9 +13,9 @@ export function Navigation() {
         InterviewAI
       </Link>
       <div className="nav-links">
-        <a href="#features" className="nav-link">Features</a>
+        {/* <a href="#features" className="nav-link">Features</a>
         <a href="#pricing" className="nav-link">Pricing</a>
-        <a href="#blog" className="nav-link">Blog</a>
+        <a href="#blog" className="nav-link">Blog</a> */}
         <Button onClick={() => navigate('/login')}>Get early access</Button>
       </div>
     </nav>
