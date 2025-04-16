@@ -1,19 +1,65 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import { Brain } from 'lucide-react';
+import { createUserWithEmailAndPassword, reload, sendEmailVerification, updateProfile } from 'firebase/auth';
+import { auth, db } from '../Firebase/Firebase-config';
+import { setDoc,doc } from 'firebase/firestore';
+import { useAuthStore } from '../store/UseAuth';
+
 
 export function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate=useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const signupWithEmail=async(e)=>{
     e.preventDefault();
-    // Handle registration logic here
-    console.log('Register:', { name, email, password });
-  };
+    if(!email || !password){
+      console.log("provide correct email and password")
+    }
 
+    try{
+      const userCredential=await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+      const user=userCredential.user;
+      // await setDoc(doc(db, "users", user.uid), {
+      //   name: name,
+      //   email: email,
+      //   createdAt: new Date(),
+      // });
+
+      await updateProfile(user,{
+        displayName:name,
+        photoURL:"https://t3.ftcdn.net/jpg/05/19/32/56/360_F_519325685_Wy96q7w50hNTxNjTUYyQbkQnSmHIQxjv.jpg"
+      })
+      console.log("user details",user)
+      console.log("Name======>",user.displayName)
+      // setUser(user)
+      // navigate('/dashboard')
+      await sendEmailVerification(user)
+      alert("Verification link send")
+      console.log(user)
+      const checkVerification=setInterval(async()=>{
+        await reload(auth.currentUser);
+        if(user.emailVerified){
+          setUser(auth.currentUser)
+          clearInterval(checkVerification)
+          navigate('/dashboard')
+        }else{
+          alert("Waiting for verification")
+        }
+      })
+    }catch(error){
+      console.log("Error==>"+error)
+    }
+
+  }
   const handleGoogleSignIn = () => {
     // Handle Google sign-in logic here
     console.log('Google sign-in clicked');
@@ -37,7 +83,7 @@ export function Register() {
           <span>or continue with email</span>
         </div>
 
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form  className="auth-form" onSubmit={signupWithEmail}>
           <div className="form-group">
             <label htmlFor="name">Full name</label>
             <input

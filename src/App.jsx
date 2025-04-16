@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { Login } from './components/Login';
-import { Register } from './components/Register';
 import { Dashboard } from './components/Dashboard';
 import Quiz from './components/Quiz';
+import { Register } from './components/Register';
 function App() {
   return (
     <Router>

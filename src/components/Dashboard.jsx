@@ -6,6 +6,9 @@ import Quiz from './Quiz';
 
 export function Dashboard() {
   const [activeComponent,setactivecomponent]=useState('chat')
+  const toggleComponent=()=>{
+    setactivecomponent((prev)=>(prev==="quiz"?"chat":"quiz"))
+  }
   return (
     <div className="dashboard-layout">
       <nav className="dashboard-nav">
@@ -14,7 +17,7 @@ export function Dashboard() {
           <span>InterviewAI</span>
           <div className="list">
           <button
-  onClick={() => setactivecomponent('quiz')}
+  onClick={toggleComponent}
   style={{
     backgroundColor: '#4F46E5', // Indigo-600
     color: 'white',
@@ -28,7 +31,7 @@ export function Dashboard() {
     boxShadow: '0 4px 12px rgba(79, 70, 229, 0.2)',
   }}
 >
- quiz
+{activeComponent === "quiz" ? "Show Chat" : "Show Quiz"}
 </button>
 
         </div>

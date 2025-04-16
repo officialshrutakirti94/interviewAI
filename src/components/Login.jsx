@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import { Brain } from 'lucide-react';
-import { signInWithPopup,GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup,GoogleAuthProvider, EmailAuthProvider, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase-config';
 import { useAuthStore } from '../store/UseAuth';
-
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -40,6 +39,21 @@ export function Login() {
     }
   };
 
+  const handleEmailSignIn=async(e)=>{
+    e.preventDefault();
+    try{
+      const userCredential=await signInWithEmailAndPassword(auth,email,password)
+
+    const user=userCredential.user;
+    console.log(user)
+    setisloggedin(true)
+    setUser(user)
+    navigate('/dashboard')
+    }catch(error){
+      console.log("Erorr::",error)
+    }
+  }
+
   return (
     <div className="auth-container">
       <div className="auth-card">
@@ -58,7 +72,7 @@ export function Login() {
           <span>or continue with email</span>
         </div>
 
-        <form  className="auth-form">
+        <form  className="auth-form" onSubmit={handleEmailSignIn}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
             <input

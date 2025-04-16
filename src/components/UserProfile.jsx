@@ -6,8 +6,8 @@ import { useAuthStore } from '../store/UseAuth';
 
 export function UserProfile() {
     const user = useAuthStore((state) => state.user);
-    console.log(user)
-    console.log("Image url======>",user.photoURL)
+    // console.log(user)
+    // console.log("Image url======>",user.photoURL)
     
   return (
     <div className="profile-container">
@@ -17,8 +17,8 @@ export function UserProfile() {
 
         </div>
         <div className="profile-info">
-          <h5>{user.displayName}</h5>
-          <p>{user.email}</p>
+          <h5>{user?.displayName || "name not available"}</h5>
+          <p>{user?.email || "Email not available"}</p>
         </div>
         <button className="profile-settings">
           <Settings size={20} />
