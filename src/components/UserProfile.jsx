@@ -1,11 +1,12 @@
 import React from 'react';
 import { User, Settings } from 'lucide-react';
 import { useAuthStore } from '../store/UseAuth';
+import { toast } from 'react-toastify/unstyled';
 
 
 
 export function UserProfile() {
-    const user = useAuthStore((state) => state.user);
+    const user = useAuthStore((state) => state.user)
     // console.log(user)
     // console.log("Image url======>",user.photoURL)
     

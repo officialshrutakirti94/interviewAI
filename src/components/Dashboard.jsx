@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserProfile } from './UserProfile';
 import { Brain, LogOut } from 'lucide-react';
 import { ChatBox } from './ChatBox';
 import Quiz from './Quiz';
+import { toast,ToastContainer } from 'react-toastify';
 
 export function Dashboard() {
   const [activeComponent,setactivecomponent]=useState('chat')
   const toggleComponent=()=>{
     setactivecomponent((prev)=>(prev==="quiz"?"chat":"quiz"))
   }
+  useEffect(()=>{
+    toast.success('You are logged in ✅')
+  },[])
+  
   return (
     <div className="dashboard-layout">
       <nav className="dashboard-nav">
@@ -52,6 +57,7 @@ export function Dashboard() {
           {activeComponent==='quiz' && <Quiz/>}
         </main>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, reload, sendEmailVerification, updatePr
 import { auth, db } from '../Firebase/Firebase-config';
 import { setDoc,doc } from 'firebase/firestore';
 import { useAuthStore } from '../store/UseAuth';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export function Register() {
@@ -43,7 +44,8 @@ export function Register() {
       // setUser(user)
       // navigate('/dashboard')
       await sendEmailVerification(user)
-      alert("Verification link send")
+      toast.info("verification link send")
+      // alert("Verification link send")
       console.log(user)
       const checkVerification=setInterval(async()=>{
         await reload(auth.currentUser);
@@ -51,12 +53,14 @@ export function Register() {
           setUser(auth.currentUser)
           clearInterval(checkVerification)
           navigate('/dashboard')
+          
         }else{
-          alert("Waiting for verification")
+          toast.info('waiting for verification')
         }
       })
     }catch(error){
       console.log("Error==>"+error)
+      alert(error)
     }
 
   }
@@ -127,6 +131,7 @@ export function Register() {
           </Link>
         </p>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

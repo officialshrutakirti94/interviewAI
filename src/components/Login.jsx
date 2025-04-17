@@ -5,6 +5,7 @@ import { Brain } from 'lucide-react';
 import { signInWithPopup,GoogleAuthProvider, EmailAuthProvider, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase-config';
 import { useAuthStore } from '../store/UseAuth';
+import { toast, ToastContainer } from 'react-toastify';
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,7 @@ export function Login() {
     setUser(user)
     navigate('/dashboard')
     
+    
 
     }catch(error){
       console.log(error)
@@ -51,6 +53,8 @@ export function Login() {
     navigate('/dashboard')
     }catch(error){
       console.log("Erorr::",error)
+      console.log("error code ::",error.code)
+      toast.error("Wrong credentials 😭")
     }
   }
 
@@ -105,6 +109,7 @@ export function Login() {
           </Link>
         </p>
       </div>
+      <ToastContainer/>
     </div>
   );
 }
