@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from './Button';
 import { Brain } from 'lucide-react';
-import { signInWithPopup,GoogleAuthProvider, EmailAuthProvider, reauthenticateWithCredential, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithPopup,GoogleAuthProvider, EmailAuthProvider, reauthenticateWithCredential, signInWithEmailAndPassword, sendPasswordResetEmail, fetchSignInMethodsForEmail } from 'firebase/auth';
 import { auth } from '../Firebase/Firebase-config';
 import { useAuthStore } from '../store/UseAuth';
 import { toast, ToastContainer } from 'react-toastify';
+
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -40,6 +41,29 @@ export function Login() {
       console.log(error)
     }
   };
+
+  const triggetResetPass=async(e)=>{
+    e.preventDefault();
+    if(!email){
+      toast.warning("Enter proper emailid ")
+      return;
+    }
+    try{
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.length === 0) {
+        toast.error("Email not registered");
+        return;
+      }
+      await sendPasswordResetEmail(auth,email)
+      .then(
+        toast.success("Reset link send to you mailid")
+      )
+    }catch(error){
+      console.log(error)
+      toast.error("failed to reset link")
+    }
+    
+  }
 
   const handleEmailSignIn=async(e)=>{
     e.preventDefault();
@@ -98,8 +122,22 @@ export function Login() {
               required
             />
           </div>
+          <button
+            onClick={triggetResetPass}
+            style={{
+              marginTop: '1rem',
+              fontSize: '14px',
+              color: '#2563EB', // blue-600
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              textDecoration: 'underline',
+              transition: 'color 0.2s ease-in-out'
+            }}
+          >
+            Forgot your password?
+          </button>
 
-          <Button className="auth-submit">Sign in</Button>
         </form>
 
         <p className="auth-footer">
