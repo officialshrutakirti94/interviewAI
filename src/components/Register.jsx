@@ -54,8 +54,6 @@ export function Register() {
           clearInterval(checkVerification)
           navigate('/dashboard')
           
-        }else{
-          toast.info('waiting for verification')
         }
       })
     }catch(error){
