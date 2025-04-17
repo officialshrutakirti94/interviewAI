@@ -138,6 +138,8 @@ export function Login() {
             Forgot your password?
           </button>
 
+          <Button>Sign in</Button>
+
         </form>
 
         <p className="auth-footer">

@@ -2,11 +2,15 @@ import React from 'react';
 import { User, Settings } from 'lucide-react';
 import { useAuthStore } from '../store/UseAuth';
 import { toast } from 'react-toastify/unstyled';
+import {useStreak} from "use-streak";
 
 
 
 export function UserProfile() {
     const user = useAuthStore((state) => state.user)
+    const today = new Date();
+    const streak = useStreak(localStorage, today);
+    console.log(streak)
     // console.log(user)
     // console.log("Image url======>",user.photoURL)
     
@@ -29,11 +33,11 @@ export function UserProfile() {
       <div className="profile-stats">
         <div className="stat-item">
           <h3>Quiz Completed</h3>
-          <p>{user?.userCompletion}</p>
+          <p>--</p>
         </div>
         <div className="stat-item">
           <h3 >Streak</h3>
-          <p>2 ️‍🔥</p>
+          <p>{streak.currentCount}🔥</p>
         </div>
       </div>
     </div>
