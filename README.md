@@ -24,7 +24,7 @@ This app combines the power of AI with interactive learning tools like quizzes a
 
 | Frontend     | Backend       | AI Integration  | Code Execution | Others               |
 |--------------|----------------|------------------|----------------|----------------------|
-| Next.js ⚡    | Node.js + Express 🌐 | Google Gen AI SDK 🧠 | Custom Python API 🐍 | Zustand, TailwindCSS, MongoDB |
+| React.js ⚡    | Node.js + Express 🌐 | Google Gen AI SDK 🧠 | Custom Python API 🐍 | Zustand, TailwindCSS, MongoDB |
 
 ---
 
