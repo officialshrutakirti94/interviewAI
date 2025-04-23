@@ -33,6 +33,11 @@ This app combines the power of AI with interactive learning tools like quizzes a
 ### 1. Clone the repo
 ```bash
 git clone https://github.com/your-username/interview-ai.git
+
+```
+
+### 1. Use the repo in local
+```bash
 cd interview-ai
 npm install
 npm run dev
